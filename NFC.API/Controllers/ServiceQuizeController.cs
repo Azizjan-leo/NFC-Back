@@ -53,9 +53,24 @@ namespace NFC.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ex.Message);
             }
         }
+
+        [Route("~/api/ServiceQuize/AllServiceQuizeResults")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ServiceQuizeResult>>> AllServiceQuizeResults()
+        {
+            try
+            {
+                return await _context.ServiceQuizeResult.Include(x=>x.Answers).ThenInclude(a => a.Question).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         // GET: api/ServiceQuize
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ServiceQuizeQuestion>>> GetServiceQuizeQuestion()
