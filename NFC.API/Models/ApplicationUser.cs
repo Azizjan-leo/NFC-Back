@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using static NFC.API.Data.ApplicationDbContext;
+using NFC.API.Data;
 
 namespace NFC.API.Models
 {

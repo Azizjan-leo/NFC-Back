@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace NFC.API.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase

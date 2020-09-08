@@ -21,6 +21,41 @@ namespace NFC.API.Controllers
             _context = context;
         }
 
+        [Route("~/api/ServiceQuize/DoneQuize")]
+        [HttpPost]
+        public async Task<IActionResult> DoneQuize(ServiceQuizeResultDTO quizeResult)
+        {
+            try
+            {
+                var questions = new List<ServiceQuizeQuestion>();
+                var result = new ServiceQuizeResult()
+                {
+                    StationId = quizeResult.StationId,
+                    Answers = new List<ServiceQuizeAnswer>()
+                };
+
+                foreach (var item in quizeResult.Answers)
+                {
+                    var question = await _context.ServiceQuizeQuestion.FindAsync(item.QuestionID);
+                    result.Answers.Add(
+                        new ServiceQuizeAnswer()
+                        {
+                            Question = question,
+                            Answer = item.Answer
+                        }
+                        );
+                }
+
+                _context.ServiceQuizeResult.Add(result);
+                await _context.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
         // GET: api/ServiceQuize
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ServiceQuizeQuestion>>> GetServiceQuizeQuestion()
