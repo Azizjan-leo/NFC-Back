@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static NFC.API.Data.ApplicationDbContext;
+﻿using NFC.API.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace NFC.API.Models
 {

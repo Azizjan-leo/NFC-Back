@@ -18,15 +18,16 @@ namespace NFC.API.Data
 
         }
 
-        public interface IDeletable
-        {
-            bool IsDeleted { get; set; }
-        }
+        public DbSet<ServiceQuizeResult> ServiceQuizeResult { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ApplicationUser>();
             modelBuilder.Entity<ServiceQuizeQuestion>();
+            modelBuilder.Entity<ServiceQuizeAnswer>();
+            modelBuilder.Entity<ServiceQuizeResult>();
 
             //modelBuilder.Entity<Review>(
             //orgUnit =>
